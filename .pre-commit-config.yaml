@@ -1,7 +1,24 @@
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ""
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
+
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.77.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_fmt
       - id: terraform_docs
+        args:
+          - --args=--config=.terraform-docs.yml
+      - id: terraform_docs
+        args:
+          - tfvars hcl --c terraform-docs-tfvars.yml .
       - id: terraform_tflint
