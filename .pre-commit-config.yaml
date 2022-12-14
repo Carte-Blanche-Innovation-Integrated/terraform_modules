@@ -3,10 +3,4 @@ repos:
     rev: v1.77.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_fmt
-      - id: terraform_docs
-        args:
-          - --args=--config=.terraform-docs.yml
-      - id: terraform_docs
-        args:
-          - tfvars hcl --c terraform-docs-tfvars.yml .
       - id: terraform_tflint

@@ -118,3 +118,4 @@ resource "aws_volume_attachment" "attachment" {
   volume_id   = each.key.id
   instance_id = aws_instance.ec2.id
 }
+

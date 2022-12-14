@@ -52,6 +52,7 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
+    needs: [tflint, check_format]
 
     steps:
       - uses: actions/checkout@v3
@@ -62,4 +63,4 @@ jobs:
         uses: terraform-docs/gh-actions@v1.0.0
         with:
           config-file: .terraform-docs.yml
-          fail-on-diff: true
+          git-push: true

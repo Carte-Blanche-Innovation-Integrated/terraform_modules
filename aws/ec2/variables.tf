@@ -101,3 +101,4 @@ variable "instance_termination_protection" {
   sensitive   = false
   nullable    = false
 }
+
