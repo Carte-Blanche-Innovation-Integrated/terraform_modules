@@ -15,4 +15,5 @@ jobs:
         uses: terraform-docs/gh-actions@main
         with:
           config-file: .terraform-docs.yml
-          git-push: true
+          git-push: false
+          fail-on-diff: true
