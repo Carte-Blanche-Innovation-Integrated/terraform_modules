@@ -1,0 +1,11 @@
+formatter: markdown table
+
+recursive:
+  enabled: false
+  path: aws
+
+output:
+  file: terraform.tfvars
+  mode: replace
+  template: |-
+    {{ .Content }}
