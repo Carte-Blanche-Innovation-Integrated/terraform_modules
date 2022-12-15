@@ -23,7 +23,7 @@ resource "tls_private_key" "key_pair" {
   count = var.should_create_keypair ? 1 : 0
 
   ecdsa_curve = "P521"
-  algorithm   = ECDSA
+  algorithm   = "ECDSA"
 }
 
 resource "aws_key_pair" "key_pair" {
@@ -39,8 +39,8 @@ resource "local_sensitive_file" "private_key" {
   file_permission      = 0400
   directory_permission = 0400
 
-  sensitive_content = tls_private_key.key_pair[0].private_key_pem
-  filename          = "${path.module}/keys/${var.key_pair_name}_private_key"
+  content  = tls_private_key.key_pair[0].private_key_pem
+  filename = "${path.module}/keys/${var.key_pair_name}_private_key"
 }
 
 resource "aws_ebs_volume" "volume" {
