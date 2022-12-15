@@ -50,7 +50,7 @@ variable "rules" {
   sensitive   = false
 
   validation {
-    condition     = sort(distinct(var.rules[*].type)) == ["egress", "ingress"]
+    condition     = sort(distinct(var.rules[*].type)) == tolist(["egress", "ingress"])
     error_message = "'type' can be either 'egress' or 'ingress'"
   }
 }
