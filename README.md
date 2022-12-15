@@ -2,7 +2,7 @@
 
 Configurable and easy to use terraform modules
 
-<!-- BEGIN_AUTOMATED_TF_DOCS_BLOCK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 No requirements.
@@ -22,4 +22,4 @@ No inputs.
 ## Outputs
 
 No outputs.
-<!-- END_AUTOMATED_TF_DOCS_BLOCK -->
+<!-- END_TF_DOCS -->
