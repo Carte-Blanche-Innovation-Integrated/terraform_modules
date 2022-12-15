@@ -12,23 +12,23 @@
 Basic usage of this module is as follows:
 ```hcl
 module "example" {
-	 source  = "<module-path>"
+	 source = "<module-path>"
 
 	 # Required variables
-	 instance_name  = 
+	 instance_name = 
 
 	 # Optional variables
-	 associate_public_ip  = true
-	 ebs_vols  = []
-	 enable_monitoring  = true
-	 iam_role_name  = null
-	 instance_termination_protection  = false
-	 instance_type  = "t2.micro"
-	 key_pair_name  = null
-	 sgs  = []
-	 should_create_keypair  = false
-	 subnet_id  = null
-	 user_data_file_path  = null
+	 associate_public_ip = true
+	 ebs_vols = []
+	 enable_monitoring = true
+	 iam_role_name = null
+	 instance_termination_protection = false
+	 instance_type = "t2.micro"
+	 key_pair_name = null
+	 sgs = []
+	 should_create_keypair = false
+	 subnet_id = null
+	 user_data_file_path = null
 }
 ```
 ## Resources

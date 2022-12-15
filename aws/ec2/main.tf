@@ -1,30 +1,3 @@
-terraform {
-  required_version = ">= 1.3"
-
-  required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
-    }
-    local = {
-      source  = "hashicorp/local"
-      version = "2.2.3"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "4.0.4"
-    }
-    aws = {
-      source  = "hashicorp/aws"
-      version = "4.46.0"
-    }
-  }
-}
-
-data "aws_availability_zones" "all" {
-  state = "available"
-}
-
 resource "random_shuffle" "az" {
   input        = data.aws_availability_zones.all.names
   result_count = 1
@@ -37,15 +10,6 @@ locals {
   tags = {
     "Name" = var.instance_name
   }
-}
-
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-2.0.*-x86_64-gp2"]
-  }
-  owners = ["amazon"]
 }
 
 resource "aws_iam_instance_profile" "instance_profile" {
