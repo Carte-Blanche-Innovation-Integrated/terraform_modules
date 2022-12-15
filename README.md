@@ -10,7 +10,7 @@ No requirements.
 Basic usage of this module is as follows:
 ```hcl
 module "example" {
-	 source  = "<module-path>"
+	 source = "<module-path>"
 }
 ```
 ## Resources
