@@ -30,7 +30,7 @@ resource "aws_key_pair" "key_pair" {
   count = var.should_create_keypair ? 1 : 0
 
   key_name   = var.key_pair_name
-  public_key = tls_private_key.key_pair[0].public_key_openssh
+  public_key = trimspace(tls_private_key.key_pair[0].public_key_openssh)
 }
 
 resource "local_sensitive_file" "private_key" {
@@ -40,7 +40,7 @@ resource "local_sensitive_file" "private_key" {
   directory_permission = 0400
 
   content  = tls_private_key.key_pair[0].private_key_pem
-  filename = "${path.module}/keys/${var.key_pair_name}_private_key"
+  filename = "${var.key_pair_name}_private_key.pem"
 }
 
 resource "aws_ebs_volume" "volume" {
