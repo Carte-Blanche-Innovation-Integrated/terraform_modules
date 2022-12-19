@@ -12,9 +12,13 @@ resource "aws_security_group" "sg" {
 resource "aws_security_group_rule" "rules" {
   for_each = var.rules
 
-  type              = each.value.type
-  from_port         = each.value.from_port
-  to_port           = each.value.to_port
-  protocol          = each.value.protocol
+  type      = each.value.type
+  from_port = each.value.from_port
+  to_port   = each.value.to_port
+  protocol  = each.value.protocol
+
+  cidr_blocks              = try(each.value.sg ? null : each.value.cidrs, null)
+  source_security_group_id = try(each.value.sg, null)
+
   security_group_id = aws_security_group.sg.id
 }

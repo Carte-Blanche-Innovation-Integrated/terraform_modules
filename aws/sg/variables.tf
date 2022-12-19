@@ -24,10 +24,12 @@ variable "rules" {
   type = list(
     object(
       {
-        type      = string
+        type      = optional(string)
         to_port   = number
         from_port = number
         protocol  = string
+        cidrs     = optional(list(string))
+        sg        = optional(string)
       }
     )
   )
@@ -37,12 +39,14 @@ variable "rules" {
       to_port   = 0
       from_port = 0
       protocol  = "all"
+      cidrs     = ["0.0.0.0/0"]
     },
     {
       type      = "egress"
       to_port   = 0
       from_port = 0
       protocol  = "all"
+      cidrs     = ["0.0.0.0/0"]
     }
   ]
   description = "List of all ingress/egress rules to be attached to the sg"
