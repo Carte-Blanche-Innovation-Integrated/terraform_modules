@@ -17,8 +17,8 @@ resource "aws_security_group_rule" "rules" {
   to_port   = each.value.to_port
   protocol  = each.value.protocol
 
-  cidr_blocks              = try(each.value.sg ? null : each.value.cidrs, null)
-  source_security_group_id = try(each.value.sg, null)
+  cidr_blocks              = each.value.sg == "" ? each.value.cidrs : null
+  source_security_group_id = each.value.sg == "" ? null : each.value.sg
 
   security_group_id = aws_security_group.sg.id
 }
