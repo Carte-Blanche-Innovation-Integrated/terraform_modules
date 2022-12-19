@@ -25,6 +25,7 @@ module "example" {
 	 instance_termination_protection = false
 	 instance_type = "t2.micro"
 	 key_pair_name = null
+	 path_to_store_private_key = null
 	 sgs = []
 	 should_create_keypair = false
 	 subnet_id = null
@@ -57,6 +58,7 @@ module "example" {
 | <a name="input_instance_termination_protection"></a> [instance\_termination\_protection](#input\_instance\_termination\_protection) | Should instance deletion protection be enabled? | `bool` | `false` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Family of the instance | `string` | `"t2.micro"` | no |
 | <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Name of the key pair. If 'should\_create\_keypair' is true then this <br>string is used as the new key name. If it is false then this key pair is considered<br>to be created already. | `string` | `null` | no |
+| <a name="input_path_to_store_private_key"></a> [path\_to\_store\_private\_key](#input\_path\_to\_store\_private\_key) | Absolute local path where the newly created private key will be stored. If 'should\_create\_keypair' is false then this value won't be used. | `string` | `null` | no |
 | <a name="input_sgs"></a> [sgs](#input\_sgs) | List of SG ids for EC2 instance. | `list(string)` | `[]` | no |
 | <a name="input_should_create_keypair"></a> [should\_create\_keypair](#input\_should\_create\_keypair) | Should a new key pair be created for the ec2 instance? | `bool` | `false` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | ID of the subnet you want to place the instance inside. | `string` | `null` | no |
