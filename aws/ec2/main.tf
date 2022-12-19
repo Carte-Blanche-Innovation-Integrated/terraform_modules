@@ -63,7 +63,7 @@ resource "aws_instance" "ec2" {
 
   ami                         = data.aws_ami.amazon_linux.id
   instance_type               = var.instance_type
-  user_data                   = try(file(var.user_data_file_path))
+  user_data                   = try(file(var.user_data_file_path, null))
   iam_instance_profile        = try(var.iam_role_name, aws_iam_instance_profile.instance_profile[0].name)
   key_name                    = var.should_create_keypair ? aws_key_pair.key_pair[0].key_name : try(var.key_pair_name, null)
   subnet_id                   = var.subnet_id
