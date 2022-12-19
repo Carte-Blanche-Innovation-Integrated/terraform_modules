@@ -13,34 +13,6 @@ variable "iam_role_name" {
   nullable    = true
 }
 
-variable "should_create_keypair" {
-  type        = bool
-  description = "Should a new key pair be created for the ec2 instance?"
-  default     = false
-  sensitive   = false
-  nullable    = false
-}
-
-variable "key_pair_name" {
-  type        = string
-  description = <<-EOT
-    Name of the key pair. If 'should_create_keypair' is true then this 
-    string is used as the new key name. If it is false then this key pair is considered
-    to be created already.
-  EOT
-  default     = null
-  sensitive   = false
-  nullable    = true
-}
-
-variable "path_to_store_private_key" {
-  type        = string
-  description = "Absolute local path where the newly created private key will be stored. If 'should_create_keypair' is false then this value won't be used."
-  default     = null
-  sensitive   = false
-  nullable    = true
-}
-
 variable "ebs_vols" {
   type        = list(number)
   description = "List that contains the size of one or more EBS volumes."
@@ -65,6 +37,14 @@ variable "instance_type" {
 variable "user_data_file_path" {
   type        = string
   description = "Path of the file in which user data is stored."
+  default     = null
+  sensitive   = false
+  nullable    = true
+}
+
+variable "key_pair_name" {
+  type        = string
+  description = "Name of the key pair. Should be created manually from the AWS console."
   default     = null
   sensitive   = false
   nullable    = true

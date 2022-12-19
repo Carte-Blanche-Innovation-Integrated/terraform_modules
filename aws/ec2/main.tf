@@ -19,26 +19,6 @@ resource "aws_iam_instance_profile" "instance_profile" {
   role = var.iam_role_name
 }
 
-resource "tls_private_key" "key_pair" {
-  count = var.should_create_keypair ? 1 : 0
-
-  algorithm = "ED25519"
-}
-
-resource "aws_key_pair" "key_pair" {
-  count = var.should_create_keypair ? 1 : 0
-
-  key_name   = var.key_pair_name
-  public_key = trimspace(tls_private_key.key_pair[0].public_key_openssh)
-}
-
-resource "local_sensitive_file" "private_key" {
-  count = var.should_create_keypair ? 1 : 0
-
-  content  = tls_private_key.key_pair[0].private_key_pem
-  filename = var.path_to_store_private_key
-}
-
 resource "aws_ebs_volume" "volume" {
   count = length(var.ebs_vols)
 
@@ -61,7 +41,7 @@ resource "aws_instance" "ec2" {
   instance_type               = var.instance_type
   user_data                   = var.user_data_file_path != null ? file(var.user_data_file_path) : null
   iam_instance_profile        = try(var.iam_role_name, aws_iam_instance_profile.instance_profile[0].name)
-  key_name                    = var.should_create_keypair ? aws_key_pair.key_pair[0].key_name : try(var.key_pair_name, null)
+  key_name                    = var.key_pair_name != null ? var.key_pair_name : null
   subnet_id                   = var.subnet_id
   monitoring                  = var.enable_monitoring
   associate_public_ip_address = var.associate_public_ip
