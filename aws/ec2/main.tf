@@ -22,8 +22,7 @@ resource "aws_iam_instance_profile" "instance_profile" {
 resource "tls_private_key" "key_pair" {
   count = var.should_create_keypair ? 1 : 0
 
-  ecdsa_curve = "P521"
-  algorithm   = "ECDSA"
+  algorithm = "ED25519"
 }
 
 resource "aws_key_pair" "key_pair" {
