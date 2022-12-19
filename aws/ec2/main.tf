@@ -35,9 +35,6 @@ resource "aws_key_pair" "key_pair" {
 resource "local_sensitive_file" "private_key" {
   count = var.should_create_keypair ? 1 : 0
 
-  file_permission      = 0400
-  directory_permission = 0400
-
   content  = tls_private_key.key_pair[0].private_key_pem
   filename = var.path_to_store_private_key
 }
