@@ -10,7 +10,7 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_security_group_rule" "rules" {
-  for_each = var.rules
+  for_each = { for i, each in var.rules : i => each }
 
   type      = each.value.type
   from_port = each.value.from_port
