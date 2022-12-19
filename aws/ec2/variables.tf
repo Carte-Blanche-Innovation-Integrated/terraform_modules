@@ -38,7 +38,7 @@ variable "path_to_store_private_key" {
   description = "Absolute local path where the newly created private key will be stored. If 'should_create_keypair' is false then this value won't be used."
   default     = null
   sensitive   = false
-  nullable    = false
+  nullable    = true
 }
 
 variable "ebs_vols" {
