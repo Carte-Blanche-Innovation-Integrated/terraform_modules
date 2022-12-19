@@ -33,6 +33,19 @@ variable "key_pair_name" {
   nullable    = true
 }
 
+variable "path_to_store_private_key" {
+  type        = string
+  description = "Absolute local path where the newly created private key will be stored. If 'should_create_keypair' is false then this value won't be used."
+  default     = null
+  sensitive   = false
+  nullable    = true
+
+  validation {
+    condition     = var.should_create_keypair && (var.path_to_store_private_key == null || var.path_to_store_private_key == "")
+    error_message = "'path_to_store_private_key' is required when 'should_create_keypair' is 'true'"
+  }
+}
+
 variable "ebs_vols" {
   type        = list(number)
   description = "List that contains the size of one or more EBS volumes."
