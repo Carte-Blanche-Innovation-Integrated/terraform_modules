@@ -39,7 +39,7 @@ resource "local_sensitive_file" "private_key" {
   directory_permission = 0400
 
   content  = tls_private_key.key_pair[0].private_key_pem
-  filename = "${path.root}/${var.key_pair_name}_private_key.pem"
+  filename = var.path_to_store_private_key
 }
 
 resource "aws_ebs_volume" "volume" {
