@@ -76,10 +76,10 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_volume_attachment" "attachment" {
-  for_each = { for i, v in aws_ebs_volume.volume : v.id => local.postfix[i] }
+  for_each = { for i, v in aws_ebs_volume.volume : i => v.id }
 
-  device_name = "/dev/sd${each.value}"
-  volume_id   = each.key
+  device_name = "/dev/sd${local.postfix[each.key]}"
+  volume_id   = each.value
   instance_id = aws_instance.ec2.id
 }
 
