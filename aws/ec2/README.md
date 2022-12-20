@@ -5,9 +5,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.46.0 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | 2.2.3 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
 ## Usage
 Basic usage of this module is as follows:
 ```hcl
