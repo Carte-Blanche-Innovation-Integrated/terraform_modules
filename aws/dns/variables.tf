@@ -8,13 +8,13 @@ variable "domain" {
 variable "records" {
   type = list(object(
     {
-      subdomain = string
+      record    = string
       type      = string
       ttl       = number
-      records   = list(string)
+      points_to = list(string)
     }
   ))
-  description = "description"
+  description = "List of records to add to the hosted zone"
   default     = []
   nullable    = false
   sensitive   = false
