@@ -58,9 +58,9 @@ variable "key_pair_name" {
   nullable    = true
 }
 
-variable "subnet_id" {
+variable "vpc_id" {
   type        = string
-  description = "ID of the subnet you want to place the instance inside."
+  description = "ID of the vpc you want to place the instance inside."
   default     = null
   sensitive   = false
   nullable    = true
