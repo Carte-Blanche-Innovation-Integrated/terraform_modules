@@ -1,6 +1,6 @@
 variable "domain" {
   type        = string
-  description = "The domain u want this hosted zone to be associated with."
+  description = "The domain name you want this hosted zone to be associated with."
   nullable    = false
   sensitive   = false
 }
@@ -8,10 +8,10 @@ variable "domain" {
 variable "records" {
   type = list(object(
     {
-      record    = string
-      type      = string
-      ttl       = number
-      points_to = list(string)
+      name  = string
+      type  = string
+      ttl   = number
+      value = list(string)
     }
   ))
   description = "List of records to add to the hosted zone"

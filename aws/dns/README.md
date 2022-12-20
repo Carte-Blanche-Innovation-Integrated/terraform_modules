@@ -28,8 +28,8 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domain"></a> [domain](#input\_domain) | The domain u want this hosted zone to be associated with. | `string` | n/a | yes |
-| <a name="input_records"></a> [records](#input\_records) | List of records to add to the hosted zone | <pre>list(object(<br>    {<br>      record    = string<br>      type      = string<br>      ttl       = number<br>      points_to = list(string)<br>    }<br>  ))</pre> | `[]` | no |
+| <a name="input_domain"></a> [domain](#input\_domain) | The domain name you want this hosted zone to be associated with. | `string` | n/a | yes |
+| <a name="input_records"></a> [records](#input\_records) | List of records to add to the hosted zone | <pre>list(object(<br>    {<br>      name  = string<br>      type  = string<br>      ttl   = number<br>      value = list(string)<br>    }<br>  ))</pre> | `[]` | no |
 ## Outputs
 
 No outputs.
