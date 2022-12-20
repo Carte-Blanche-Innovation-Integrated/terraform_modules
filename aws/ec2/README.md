@@ -26,6 +26,7 @@ module "example" {
 	 instance_type = "t2.micro"
 	 key_pair_name = null
 	 sgs = []
+	 should_create_eip = true
 	 subnet_id = null
 	 user_data_file_path = null
 }
@@ -35,6 +36,8 @@ module "example" {
 | Name | Type |
 |------|------|
 | [aws_ebs_volume.volume](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/ebs_volume) | resource |
+| [aws_eip.eip](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/eip) | resource |
+| [aws_eip_association.eip_assoc](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/eip_association) | resource |
 | [aws_iam_instance_profile.instance_profile](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/iam_instance_profile) | resource |
 | [aws_instance.ec2](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/instance) | resource |
 | [aws_volume_attachment.attachment](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/volume_attachment) | resource |
@@ -54,11 +57,12 @@ module "example" {
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Family of the instance | `string` | `"t2.micro"` | no |
 | <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Name of the key pair. Should be created manually from the AWS console. | `string` | `null` | no |
 | <a name="input_sgs"></a> [sgs](#input\_sgs) | List of SG ids for EC2 instance. | `list(string)` | `[]` | no |
+| <a name="input_should_create_eip"></a> [should\_create\_eip](#input\_should\_create\_eip) | If the created instance should have an EIP attached to it. | `bool` | `true` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | ID of the subnet you want to place the instance inside. | `string` | `null` | no |
 | <a name="input_user_data_file_path"></a> [user\_data\_file\_path](#input\_user\_data\_file\_path) | Path of the file in which user data is stored. | `string` | `null` | no |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dns"></a> [dns](#output\_dns) | n/a |
+| <a name="output_instance_ip"></a> [instance\_ip](#output\_instance\_ip) | Publicly accessible IPv4 address of the EC2 instance. |
 <!-- END_TF_DOCS -->

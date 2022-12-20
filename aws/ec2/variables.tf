@@ -26,6 +26,14 @@ variable "ebs_vols" {
   }
 }
 
+variable "should_create_eip" {
+  type        = bool
+  description = "If the created instance should have an EIP attached to it."
+  default     = true
+  sensitive   = false
+  nullable    = false
+}
+
 variable "instance_type" {
   type        = string
   description = "Family of the instance"
@@ -89,4 +97,3 @@ variable "instance_termination_protection" {
   sensitive   = false
   nullable    = false
 }
-

@@ -29,6 +29,12 @@ resource "aws_ebs_volume" "volume" {
   tags              = local.tags
 }
 
+resource "aws_eip" "eip" {
+  count = var.should_create_eip ? 1 : 0
+
+  vpc = true
+}
+
 resource "aws_instance" "ec2" {
   hibernation                 = false
   user_data_replace_on_change = true
@@ -59,3 +65,9 @@ resource "aws_volume_attachment" "attachment" {
   instance_id = aws_instance.ec2.id
 }
 
+resource "aws_eip_association" "eip_assoc" {
+  count = var.should_create_eip ? 1 : 0
+
+  instance_id   = aws_instance.ec2.id
+  allocation_id = aws_eip.eip[0].id
+}
