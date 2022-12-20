@@ -27,8 +27,8 @@ module "example" {
 	 key_pair_name = null
 	 sgs = []
 	 should_create_eip = true
-	 subnet_id = null
 	 user_data_file_path = null
+	 vpc_id = null
 }
 ```
 ## Resources
@@ -42,8 +42,10 @@ module "example" {
 | [aws_instance.ec2](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/instance) | resource |
 | [aws_volume_attachment.attachment](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/volume_attachment) | resource |
 | [random_shuffle.az](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/shuffle) | resource |
+| [random_shuffle.subnets](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/shuffle) | resource |
 | [aws_ami.amazon_linux](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/data-sources/ami) | data source |
 | [aws_availability_zones.all](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/data-sources/availability_zones) | data source |
+| [aws_subnets.subnets](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/data-sources/subnets) | data source |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -58,8 +60,8 @@ module "example" {
 | <a name="input_key_pair_name"></a> [key\_pair\_name](#input\_key\_pair\_name) | Name of the key pair. Should be created manually from the AWS console. | `string` | `null` | no |
 | <a name="input_sgs"></a> [sgs](#input\_sgs) | List of SG ids for EC2 instance. | `list(string)` | `[]` | no |
 | <a name="input_should_create_eip"></a> [should\_create\_eip](#input\_should\_create\_eip) | If the created instance should have an EIP attached to it. | `bool` | `true` | no |
-| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | ID of the subnet you want to place the instance inside. | `string` | `null` | no |
 | <a name="input_user_data_file_path"></a> [user\_data\_file\_path](#input\_user\_data\_file\_path) | Path of the file in which user data is stored. | `string` | `null` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the vpc you want to place the instance inside. | `string` | `null` | no |
 ## Outputs
 
 | Name | Description |

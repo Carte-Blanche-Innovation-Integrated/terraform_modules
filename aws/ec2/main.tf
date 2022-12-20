@@ -3,6 +3,23 @@ resource "random_shuffle" "az" {
   result_count = 1
 }
 
+data "aws_subnets" "subnets" {
+  filter {
+    name   = "availabilityZone"
+    values = [local.az]
+  }
+
+  filter {
+    name   = "vpc-id"
+    values = [var.vpc_id]
+  }
+}
+
+resource "random_shuffle" "subnets" {
+  input        = data.aws_subnets.subnets.ids
+  result_count = 1
+}
+
 locals {
   postfix = ["f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
 
@@ -48,7 +65,7 @@ resource "aws_instance" "ec2" {
   user_data                   = var.user_data_file_path != null ? file(var.user_data_file_path) : null
   iam_instance_profile        = try(var.iam_role_name, aws_iam_instance_profile.instance_profile[0].name)
   key_name                    = var.key_pair_name != null ? var.key_pair_name : null
-  subnet_id                   = var.subnet_id
+  subnet_id                   = random_shuffle.subnets.results[0]
   monitoring                  = var.enable_monitoring
   associate_public_ip_address = var.associate_public_ip
   vpc_security_group_ids      = var.sgs
