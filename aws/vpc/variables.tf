@@ -9,7 +9,7 @@ variable "vpc_cidr" {
 }
 
 variable "public_subnet_cidrs" {
-  type        = list(any)
+  type        = list(string)
   default     = []
   description = "A list of CIDR blocks for the public subnets"
   nullable    = false
@@ -17,7 +17,7 @@ variable "public_subnet_cidrs" {
 }
 
 variable "private_subnet_cidrs" {
-  type        = list(any)
+  type        = list(string)
   default     = []
   description = "A list of CIDR blocks for the private subnets"
   nullable    = false
