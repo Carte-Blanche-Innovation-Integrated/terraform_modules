@@ -5,21 +5,6 @@ variable "domain" {
   sensitive   = false
 }
 
-variable "records" {
-  type = list(object(
-    {
-      name  = string
-      type  = string
-      ttl   = number
-      value = list(string)
-    }
-  ))
-  description = "List of records to add to the hosted zone"
-  default     = []
-  nullable    = false
-  sensitive   = false
-}
-
 variable "common_tags" {
   type        = map(string)
   description = "A map of common tags to be applied on all the created resources"
