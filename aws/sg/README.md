@@ -16,6 +16,7 @@ module "example" {
 	 sg_vpc_id = 
 
 	 # Optional variables
+	 common_tags = {}
 	 rules = [
   {
     "cidrs": [
@@ -51,6 +52,7 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
 | <a name="input_rules"></a> [rules](#input\_rules) | List of all ingress/egress rules to be attached to the sg | <pre>list(<br>    object(<br>      {<br>        type      = string<br>        to_port   = number<br>        from_port = number<br>        protocol  = string<br>        cidrs     = list(string)<br>        sg        = string<br>      }<br>    )<br>  )</pre> | <pre>[<br>  {<br>    "cidrs": [<br>      "0.0.0.0/0"<br>    ],<br>    "from_port": 0,<br>    "protocol": "all",<br>    "sg": "",<br>    "to_port": 0,<br>    "type": "ingress"<br>  },<br>  {<br>    "cidrs": [<br>      "0.0.0.0/0"<br>    ],<br>    "from_port": 0,<br>    "protocol": "all",<br>    "sg": "",<br>    "to_port": 0,<br>    "type": "egress"<br>  }<br>]</pre> | no |
 | <a name="input_sg_description"></a> [sg\_description](#input\_sg\_description) | Description of the security group | `string` | `"Managed by Terraform"` | no |
 | <a name="input_sg_name"></a> [sg\_name](#input\_sg\_name) | Name of the security group | `string` | n/a | yes |

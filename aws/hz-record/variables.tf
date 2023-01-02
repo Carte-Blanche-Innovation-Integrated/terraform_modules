@@ -1,6 +1,6 @@
-variable "domain" {
+variable "zone_id" {
   type        = string
-  description = "The domain name you want this hosted zone to be associated with."
+  description = "The Hosted Zone ID"
   nullable    = false
   sensitive   = false
 }

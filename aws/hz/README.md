@@ -1,3 +1,7 @@
+# Module for Hosted zone
+
+Create a route53 hosted zone.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -15,22 +19,23 @@ module "example" {
 	 domain = 
 
 	 # Optional variables
-	 records = []
+	 common_tags = {}
 }
 ```
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_route53_record.simple_records](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/route53_record) | resource |
-| [aws_route53_zone.public_zone](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/route53_zone) | resource |
+| [aws_route53_zone.zone](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/route53_zone) | resource |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain name you want this hosted zone to be associated with. | `string` | n/a | yes |
-| <a name="input_records"></a> [records](#input\_records) | List of records to add to the hosted zone | <pre>list(object(<br>    {<br>      name  = string<br>      type  = string<br>      ttl   = number<br>      value = list(string)<br>    }<br>  ))</pre> | `[]` | no |
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_zone_id"></a> [zone\_id](#output\_zone\_id) | The Hosted Zone ID. This can be referenced by zone records. |
 <!-- END_TF_DOCS -->

@@ -15,6 +15,7 @@ module "example" {
 	 ecr_repo_name = 
 
 	 # Optional variables
+	 common_tags = {}
 	 force_delete = false
 	 image_tag_mutability = "MUTABLE"
 	 scan_on_push = true
@@ -29,6 +30,7 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
 | <a name="input_ecr_repo_name"></a> [ecr\_repo\_name](#input\_ecr\_repo\_name) | Name of the repo for the ECR | `string` | n/a | yes |
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | If true, will delete the repository even if it contains images. Defaults to false. | `bool` | `false` | no |
 | <a name="input_image_tag_mutability"></a> [image\_tag\_mutability](#input\_image\_tag\_mutability) | Should the image tags be mutable/replaceable? | `string` | `"MUTABLE"` | no |

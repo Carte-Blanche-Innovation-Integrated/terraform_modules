@@ -24,9 +24,9 @@ locals {
   postfix = ["f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"]
 
   az = random_shuffle.az.result[0]
-  tags = {
+  tags = merge({
     "Name" = var.instance_name
-  }
+  }, var.common_tags)
 }
 
 resource "aws_iam_instance_profile" "instance_profile" {
@@ -34,22 +34,26 @@ resource "aws_iam_instance_profile" "instance_profile" {
 
   name = var.iam_role_name
   role = var.iam_role_name
+
+  tags = var.common_tags
 }
 
 resource "aws_ebs_volume" "volume" {
-  count = length(var.ebs_vols)
+  for_each = { for i, each in var.ebs_vols : i => each }
 
-  type = "gp2"
-
+  type              = each.value.type
   availability_zone = local.az
-  size              = var.ebs_vols[count.index]
-  tags              = local.tags
+  size              = each.value.size
+
+  tags = local.tags
 }
 
 resource "aws_eip" "eip" {
   count = var.should_create_eip ? 1 : 0
 
   vpc = true
+
+  tags = local.tags
 }
 
 resource "aws_instance" "ec2" {
@@ -71,7 +75,8 @@ resource "aws_instance" "ec2" {
   vpc_security_group_ids      = var.sgs
   availability_zone           = local.az
   disable_api_termination     = var.instance_termination_protection
-  tags                        = local.tags
+
+  tags = local.tags
 }
 
 resource "aws_volume_attachment" "attachment" {
