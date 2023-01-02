@@ -1,5 +1,7 @@
 resource "aws_route53_zone" "public_zone" {
   name = var.domain
+
+  tags = var.common_tags
 }
 
 resource "aws_route53_record" "simple_records" {

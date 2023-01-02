@@ -1,10 +1,5 @@
 data "aws_availability_zones" "all" {}
 
-resource "random_shuffle" "az" {
-  input        = data.aws_availability_zones.all.names
-  result_count = 1
-}
-
 locals {
   nat_count = var.enable_nat ? var.single_nat ? 1 : min(length(var.public_subnet_cidrs), length(var.private_subnet_cidrs)) : 0
 }
@@ -19,9 +14,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    "Name" = var.vpc_name
-  }
+  tags = merge({ "Name" = var.vpc_name }, var.common_tags)
 }
 
 #############################
@@ -31,7 +24,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = { "Name" = "${var.vpc_name}-igw" }
+  tags = merge({ "Name" = "${var.vpc_name}-igw" }, var.common_tags)
 }
 
 #############################
@@ -42,11 +35,11 @@ resource "aws_subnet" "public_subnets" {
   count = length(var.public_subnet_cidrs)
 
   cidr_block              = var.public_subnet_cidrs[count.index]
-  availability_zone       = random_shuffle.az.result[0]
+  availability_zone       = data.aws_availability_zones.all.names[count.index]
   vpc_id                  = aws_vpc.vpc.id
   map_public_ip_on_launch = true
 
-  tags = { "Name" = "${var.vpc_name}-public-subnet-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-public-subnet-${count.index}" }, var.common_tags)
 }
 
 resource "aws_route_table" "public_tables" {
@@ -54,7 +47,7 @@ resource "aws_route_table" "public_tables" {
 
   vpc_id = aws_vpc.vpc.id
 
-  tags = { "Name" = "${var.vpc_name}-public-route-table-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-public-route-table-${count.index}" }, var.common_tags)
 }
 
 resource "aws_route_table_association" "public_associations" {
@@ -82,7 +75,7 @@ resource "aws_eip" "public_nat_eips" {
 
   vpc = true
 
-  tags = { "Name" = "${var.vpc_name}-nat-eip-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-nat-eip-${count.index}" }, var.common_tags)
 }
 
 resource "aws_nat_gateway" "nat_gateways" {
@@ -91,7 +84,7 @@ resource "aws_nat_gateway" "nat_gateways" {
   allocation_id = aws_eip.public_nat_eips[count.index].id
   subnet_id     = aws_subnet.public_subnets[count.index].id
 
-  tags = { "Name" = "${var.vpc_name}-natgw-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-natgw-${count.index}" }, var.common_tags)
 }
 
 #############################
@@ -105,7 +98,7 @@ resource "aws_subnet" "private_subnets" {
   availability_zone = data.aws_availability_zones.all.names[count.index]
   vpc_id            = aws_vpc.vpc.id
 
-  tags = { "Name" = "${var.vpc_name}-private-subnet-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-private-subnet-${count.index}" }, var.common_tags)
 }
 
 resource "aws_route_table" "private_tables" {
@@ -113,7 +106,7 @@ resource "aws_route_table" "private_tables" {
 
   vpc_id = aws_vpc.vpc.id
 
-  tags = { "Name" = "${var.vpc_name}-private-route-table-${count.index}" }
+  tags = merge({ "Name" = "${var.vpc_name}-private-route-table-${count.index}" }, var.common_tags)
 }
 
 resource "aws_route_table_association" "private_associations" {

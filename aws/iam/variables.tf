@@ -1,3 +1,11 @@
+variable "should_create" {
+  type        = bool
+  default     = true
+  description = "Should all the resources in this module be created? This flag is helpful when conditionally creating this module"
+  nullable    = false
+  sensitive   = false
+}
+
 variable "role_name" {
   type        = string
   description = "Name of the iam role."
@@ -6,9 +14,7 @@ variable "role_name" {
 }
 
 variable "assume_role_policy" {
-  type = string
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
+  type        = string
   default     = ""
   description = "Provide the assume role policy. If not provided then by default EC2 assume role policy will be used."
   nullable    = false
@@ -36,5 +42,13 @@ variable "new_policies" {
   default     = []
   description = "List of json encoded policies (new) to be created and then attached to this role."
   nullable    = true
+  sensitive   = false
+}
+
+variable "common_tags" {
+  type        = map(string)
+  description = "A map of common tags to be applied on all the created resources"
+  default     = {}
+  nullable    = false
   sensitive   = false
 }

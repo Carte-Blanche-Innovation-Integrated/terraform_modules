@@ -7,6 +7,8 @@ resource "aws_security_group" "sg" {
     # Necessary if changing 'name' or 'name_prefix' properties.
     create_before_destroy = true
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_security_group_rule" "rules" {

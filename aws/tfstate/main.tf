@@ -7,11 +7,15 @@ resource "aws_dynamodb_table" "terraform" {
     name = "LockID"
     type = "S"
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_s3_bucket" "bucket" {
   bucket        = var.name
   force_destroy = true
+
+  tags = var.common_tags
 }
 
 resource "aws_s3_bucket_public_access_block" "access_block" {

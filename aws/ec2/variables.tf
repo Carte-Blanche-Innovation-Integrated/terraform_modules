@@ -14,8 +14,11 @@ variable "iam_role_name" {
 }
 
 variable "ebs_vols" {
-  type        = list(number)
-  description = "List that contains the size of one or more EBS volumes."
+  type = list(object({
+    type = string
+    size = number
+  }))
+  description = "Simple list of one or more EBS volumes' properties."
   default     = []
   sensitive   = false
   nullable    = false
@@ -96,4 +99,12 @@ variable "instance_termination_protection" {
   default     = false
   sensitive   = false
   nullable    = false
+}
+
+variable "common_tags" {
+  type        = map(string)
+  description = "A map of common tags to be applied on all the created resources"
+  default     = {}
+  nullable    = false
+  sensitive   = false
 }
