@@ -5,7 +5,6 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.46.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.4.3 |
 ## Usage
 Basic usage of this module is as follows:
 ```hcl
@@ -17,6 +16,7 @@ module "example" {
 	 vpc_name = 
 
 	 # Optional variables
+	 common_tags = {}
 	 enable_nat = false
 	 private_subnet_cidrs = []
 	 public_subnet_cidrs = []
@@ -39,12 +39,12 @@ module "example" {
 | [aws_subnet.private_subnets](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/subnet) | resource |
 | [aws_subnet.public_subnets](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/subnet) | resource |
 | [aws_vpc.vpc](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/resources/vpc) | resource |
-| [random_shuffle.az](https://registry.terraform.io/providers/hashicorp/random/3.4.3/docs/resources/shuffle) | resource |
 | [aws_availability_zones.all](https://registry.terraform.io/providers/hashicorp/aws/4.46.0/docs/data-sources/availability_zones) | data source |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
 | <a name="input_enable_nat"></a> [enable\_nat](#input\_enable\_nat) | Whether to create nat gateways or not. | `bool` | `false` | no |
 | <a name="input_private_subnet_cidrs"></a> [private\_subnet\_cidrs](#input\_private\_subnet\_cidrs) | A list of CIDR blocks for the private subnets | `list(string)` | `[]` | no |
 | <a name="input_public_subnet_cidrs"></a> [public\_subnet\_cidrs](#input\_public\_subnet\_cidrs) | A list of CIDR blocks for the public subnets | `list(string)` | `[]` | no |

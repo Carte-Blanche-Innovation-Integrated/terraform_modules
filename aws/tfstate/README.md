@@ -15,6 +15,9 @@ module "example" {
 
 	 # Required variables
 	 name = 
+
+	 # Optional variables
+	 common_tags = {}
 }
 ```
 ## Resources
@@ -29,6 +32,7 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | This name will be used as s3 bucket name and dynamodb table name. | `string` | n/a | yes |
 ## Outputs
 

@@ -17,6 +17,7 @@ module "example" {
 
 	 # Optional variables
 	 associate_public_ip = true
+	 common_tags = {}
 	 ebs_vols = []
 	 enable_monitoring = true
 	 iam_role_name = null
@@ -49,7 +50,8 @@ module "example" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_associate_public_ip"></a> [associate\_public\_ip](#input\_associate\_public\_ip) | Should a public ip address be attached with the instance? | `bool` | `true` | no |
-| <a name="input_ebs_vols"></a> [ebs\_vols](#input\_ebs\_vols) | List that contains the size of one or more EBS volumes. | `list(number)` | `[]` | no |
+| <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of common tags to be applied on all the created resources | `map(string)` | `{}` | no |
+| <a name="input_ebs_vols"></a> [ebs\_vols](#input\_ebs\_vols) | Simple list of one or more EBS volumes' properties. | <pre>list(object({<br>    type = string<br>    size = number<br>  }))</pre> | `[]` | no |
 | <a name="input_enable_monitoring"></a> [enable\_monitoring](#input\_enable\_monitoring) | Should the detailed monitoring for this instance be enabled? | `bool` | `true` | no |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the iam role, needed to create an instance profile for ec2. | `string` | `null` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name of the ec2 instance. | `string` | n/a | yes |
