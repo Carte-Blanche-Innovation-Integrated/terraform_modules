@@ -1,7 +1,7 @@
 resource "aws_lb_listener" "listeners" {
   for_each = { for i, each in var.listeners : i => each }
 
-  load_balancer_arn = var.each["lb_arn"]
+  load_balancer_arn = var.lb_arn
   certificate_arn   = lookup(var.each, "certificate_arn", null)
   port              = var.each["port"]
   protocol          = var.each["protocol"]

@@ -1,3 +1,11 @@
+variable "lb_arn" {
+  type        = string
+  description = "ARN of the loadbalancer"
+  sensitive   = false
+  nullable    = false
+}
+
+
 variable "listeners" {
   type        = list(map(any))
   description = "List of listener objects"

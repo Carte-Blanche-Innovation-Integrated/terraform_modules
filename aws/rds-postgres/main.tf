@@ -68,37 +68,6 @@ resource "aws_db_instance" "slaves" {
   depends_on = [aws_db_instance.master]
 }
 
-# resource "aws_iam_role" "role" {
-#   count = var.monitoring_interval != 0 ? 1 : 0
-
-#   name = "rds-monitoring-role"
-
-#   assume_role_policy = <<EOF
-# {
-#   "Version": "2012-10-17",
-#   "Statement": [
-#     {
-#       "Sid": "",
-#       "Effect": "Allow",
-#       "Principal": {
-#         "Service": "monitoring.rds.amazonaws.com"
-#       },
-#       "Action": "sts:AssumeRole"
-#     }
-#   ]
-# }
-# EOF
-
-#   tags = var.common_tags
-# }
-
-# resource "aws_iam_role_policy_attachment" "attachment" {
-#   count = var.monitoring_interval != 0 ? 1 : 0
-
-#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
-#   role       = aws_iam_role.role[0].name
-# }
-
 module "iam" {
   source = "../iam"
 

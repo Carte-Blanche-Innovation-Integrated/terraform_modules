@@ -9,37 +9,6 @@ resource "aws_codedeploy_app" "app" {
   tags = var.common_tags
 }
 
-# resource "aws_iam_role" "role" {
-#   count = var.create_iam_role ? 1 : 0
-
-#   name = "${var.app_name}-codeploy-role"
-
-#   assume_role_policy = <<EOF
-# {
-#   "Version": "2012-10-17",
-#   "Statement": [
-#     {
-#       "Sid": "",
-#       "Effect": "Allow",
-#       "Principal": {
-#         "Service": "codedeploy.amazonaws.com"
-#       },
-#       "Action": "sts:AssumeRole"
-#     }
-#   ]
-# }
-# EOF
-
-#   tags = var.common_tags
-# }
-
-# resource "aws_iam_role_policy_attachment" "attachment" {
-#   count = var.create_iam_role ? 1 : 0
-
-#   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
-#   role       = aws_iam_role.role[0].name
-# }
-
 module "iam" {
   source = "../iam"
 
