@@ -10,7 +10,7 @@ resource "aws_lb_listener" "listener" {
     target_group_arn = lookup(var.action, "target_group_arn", null)
 
     dynamic "redirect" {
-      count = var.action["type"] == "redirect" ? 1 : 0
+      for_each = var.action["type"] == "redirect" ? toset([1]) : []
 
       content {
         port        = var.redirect["port"]
