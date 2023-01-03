@@ -5,9 +5,8 @@ variable "lb_arn" {
   nullable    = false
 }
 
-
-variable "listeners" {
-  type        = list(map(any))
+variable "listener" {
+  type        = map(any)
   description = "List of listener objects"
   sensitive   = false
   nullable    = false

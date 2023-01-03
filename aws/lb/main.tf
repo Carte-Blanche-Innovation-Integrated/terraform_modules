@@ -2,7 +2,7 @@ resource "aws_lb" "lb" {
   name               = var.name
   internal           = false
   load_balancer_type = "application"
-  subnets            = data.aws_subnet_ids.all.ids
+  subnets            = data.aws_subnets.all.ids
   security_groups    = var.sg_ids
   tags               = var.common_tags
 }

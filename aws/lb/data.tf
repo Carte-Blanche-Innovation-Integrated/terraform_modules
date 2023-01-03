@@ -1,3 +1,6 @@
-data "aws_subnet_ids" "all" {
-  vpc_id = var.vpc_id
+data "aws_subnets" "all" {
+  filter {
+    name   = "vpc-id"
+    values = [var.vpc_id]
+  }
 }
