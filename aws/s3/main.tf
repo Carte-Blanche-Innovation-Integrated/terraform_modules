@@ -43,19 +43,19 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
 }
 
 resource "aws_s3_bucket_cors_configuration" "cors" {
-  count = length(var.cors_rules) >= 1 ? 1 : 0
+  count = var.enable_cors ? 1 : 0
 
   bucket = aws_s3_bucket.bucket.id
 
   dynamic "cors_rule" {
-    for_each = { for i, rule in var.cors_rules : i => rule }
+    for_each = var.enable_cors ? toset([1]) : []
 
     content {
-      allowed_headers = lookup(cors_rule.value, "allowed_headers", ["*"])
-      allowed_methods = lookup(cors_rule.value, "allowed_methods", ["GET", "HEAD"])
-      allowed_origins = lookup(cors_rule.value, "allowed_origins", ["*"])
-      expose_headers  = lookup(cors_rule.value, "expose_headers", ["ETag"])
-      max_age_seconds = lookup(cors_rule.value, "max_age_seconds", 3000)
+      allowed_headers = var.cors_allowed_headers
+      allowed_methods = var.cors_allowed_methods
+      allowed_origins = var.cors_allowed_origins
+      expose_headers  = var.cors_expose_headers
+      max_age_seconds = var.cors_max_age_seconds
     }
   }
 }
