@@ -6,19 +6,18 @@ resource "aws_lb_listener" "listener" {
   ssl_policy        = lookup(var.listener, "ssl_policy", null)
 
   default_action {
-    type             = var.listener["action"]["type"]
-    target_group_arn = lookup(var.listener["action"], "target_group_arn", null)
+    type             = var.action["type"]
+    target_group_arn = lookup(var.action, "target_group_arn", null)
 
     dynamic "redirect" {
-      count = var.listener["action"]["type"] == "redirect" ? 1 : 0
+      count = var.action["type"] == "redirect" ? 1 : 0
 
       content {
-        port        = var.listener["action"]["port"]
-        protocol    = var.listener["action"]["protocol"]
-        status_code = var.listener["action"]["status_code"]
+        port        = var.redirect["port"]
+        protocol    = var.redirect["protocol"]
+        status_code = var.redirect["status_code"]
       }
     }
   }
-
   tags = var.common_tags
 }

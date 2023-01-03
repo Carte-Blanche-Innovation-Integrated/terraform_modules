@@ -7,7 +7,22 @@ variable "lb_arn" {
 
 variable "listener" {
   type        = map(any)
-  description = "List of listener objects"
+  description = "Listener object"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "action" {
+  type        = map(any)
+  description = "Action object"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "redirect" {
+  type        = map(any)
+  description = "Listener redirect object, if any"
+  default     = {}
   sensitive   = false
   nullable    = false
 }
