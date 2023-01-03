@@ -19,7 +19,7 @@ resource "aws_db_instance" "master" {
   enabled_cloudwatch_logs_exports = toset(["postgresql", "upgrade"])
   engine                          = "postgres"
   engine_version                  = var.postgres_engine_version
-  final_snapshot_identifier       = var.final_snapshot_identifier
+  final_snapshot_identifier       = !var.skip_final_snapshot ? var.final_snapshot_identifier : null
   identifier                      = "${var.identifier}-master"
   instance_class                  = var.instance_class
   maintenance_window              = var.maintenance_window

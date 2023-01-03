@@ -17,6 +17,6 @@ output "master_db_password" {
 }
 
 output "master_db_name" {
-  value     = aws_db_instance.master.name
+  value     = aws_db_instance.master.db_name
   sensitive = true
 }
