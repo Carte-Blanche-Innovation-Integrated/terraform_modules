@@ -5,6 +5,13 @@ variable "name" {
   nullable    = false
 }
 
+variable "subnet_ids" {
+  type        = list(string)
+  description = "List of VPC subnet ids where this lb will be placed"
+  sensitive   = false
+  nullable    = false
+}
+
 variable "sg_ids" {
   type        = list(string)
   description = "List of SG ids which allow the traffic from/out of lb"
