@@ -54,11 +54,6 @@ variable "rules" {
   description = "List of all ingress/egress rules to be attached to the sg"
   nullable    = false
   sensitive   = false
-
-  validation {
-    condition     = sort(distinct(var.rules[*].type)) == tolist(["egress", "ingress"])
-    error_message = "'type' can be either 'egress' or 'ingress'"
-  }
 }
 
 variable "common_tags" {
