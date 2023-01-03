@@ -25,6 +25,14 @@ variable "common_tags" {
   sensitive   = false
 }
 
+variable "allow_major_version_upgrade" {
+  type        = bool
+  description = "Should the major version be updated automatically?"
+  default     = false
+  nullable    = false
+  sensitive   = false
+}
+
 variable "allocated_storage" {
   type        = number
   description = "Storage in GBs"
