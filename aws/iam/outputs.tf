@@ -11,7 +11,7 @@ output "iam_role_arn" {
 }
 
 output "instance_profile_arn" {
-  value       = var.create_instance_profile ? var.aws_iam_instance_profile.profile.arn : null
+  value       = var.create_instance_profile ? aws_iam_instance_profile.profile.arn : null
   sensitive   = false
   description = "ARN of the instance profile, if any."
 }
