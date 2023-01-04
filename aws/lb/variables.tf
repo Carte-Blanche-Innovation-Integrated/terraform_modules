@@ -106,3 +106,11 @@ variable "health_check_path" {
   sensitive   = false
   nullable    = false
 }
+
+variable "matcher" {
+  type        = string
+  description = "Response codes to use when checking for a healthy responses from a target"
+  default     = "200-499"
+  sensitive   = false
+  nullable    = false
+}

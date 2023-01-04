@@ -23,6 +23,7 @@ resource "aws_lb_target_group" "target_group" {
     interval            = var.interval
     timeout             = var.timeout
     path                = var.health_check_path
+    matcher             = var.matcher
   }
 
   tags = var.common_tags
