@@ -43,3 +43,12 @@ resource "aws_iam_role_policy_attachment" "custom_rp_attachments" {
   role       = aws_iam_role.role[0].name
   policy_arn = aws_iam_policy.policies[count.index].arn
 }
+
+resource "aws_iam_instance_profile" "profile" {
+  count = var.create_instance_profile ? 1 : 0
+
+  name = "${var.role_name}-instance-profile"
+  role = aws_iam_role.role[0].name
+
+  tags = var.common_tags
+}

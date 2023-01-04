@@ -52,3 +52,11 @@ variable "common_tags" {
   nullable    = false
   sensitive   = false
 }
+
+variable "create_instance_profile" {
+  type        = bool
+  default     = true
+  description = "Should create instance profile?"
+  nullable    = false
+  sensitive   = false
+}

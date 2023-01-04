@@ -9,3 +9,9 @@ output "iam_role_arn" {
   sensitive   = false
   description = "ARN of the iam role"
 }
+
+output "instance_profile_arn" {
+  value       = var.create_instance_profile ? var.aws_iam_instance_profile.profile.arn : null
+  sensitive   = false
+  description = "ARN of the instance profile, if any."
+}
