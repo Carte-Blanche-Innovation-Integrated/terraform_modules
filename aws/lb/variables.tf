@@ -102,6 +102,7 @@ variable "timeout" {
 variable "health_check_path" {
   type        = string
   description = "Health check url to hit"
+  default     = "/"
   sensitive   = false
   nullable    = false
 }
