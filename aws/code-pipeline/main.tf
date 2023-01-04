@@ -103,6 +103,13 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
     {
       "Effect": "Allow",
       "Action": [
+        "codestar-connections:UseConnection"
+      ],
+      "Resource": "${var.connection_arn}"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "codebuild:BatchGetBuilds",
         "codebuild:StartBuild"
       ],
