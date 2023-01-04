@@ -71,7 +71,7 @@ resource "aws_codedeploy_deployment_group" "group" {
 
   auto_rollback_configuration {
     enabled = true
-    events  = [local.triggers[2]]
+    events  = ["DeploymentFailure"]
   }
 
   alarm_configuration {
