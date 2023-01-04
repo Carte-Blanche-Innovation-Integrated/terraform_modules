@@ -48,7 +48,8 @@ resource "aws_codepipeline" "codepipeline" {
 }
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "${replace(var.pipeline_name, "_", "-")}-cp-aft-bkt"
+  bucket        = "${replace(var.pipeline_name, "_", "-")}-cp-aft-bkt"
+  force_destroy = true
 
   tags = var.common_tags
 }
