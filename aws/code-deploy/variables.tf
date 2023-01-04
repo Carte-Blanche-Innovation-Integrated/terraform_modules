@@ -21,6 +21,14 @@ variable "create_iam_role" {
   sensitive   = false
 }
 
+variable "iam_role_name" {
+  type        = any
+  default     = null
+  description = "Name of the pre created iam role"
+  nullable    = true
+  sensitive   = false
+}
+
 variable "create_sns_topics" {
   type        = bool
   default     = false
