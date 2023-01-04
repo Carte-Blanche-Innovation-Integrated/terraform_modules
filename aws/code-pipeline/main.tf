@@ -17,7 +17,7 @@ resource "aws_codepipeline" "codepipeline" {
       name = stage.value.name
 
       dynamic "action" {
-        for_each = { for i, each in var.stages : i => each.action if each.name == stage.value.name }
+        for_each = stage.value.action
 
         content {
           name             = action.value["name"]
