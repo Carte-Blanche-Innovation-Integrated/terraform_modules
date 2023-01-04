@@ -6,18 +6,10 @@ variable "pipeline_name" {
 }
 
 variable "stages" {
-  type = list(object({
-    name   = string
-    action = map(any)
-  }))
+  type        = list(any)
   description = "A list of stages that constitute this pipeline"
   sensitive   = false
-  nullable    = true
-
-  validation {
-    condition     = length(var.stages) >= 2
-    error_message = "Minimum of at least two stage blocks is required"
-  }
+  nullable    = false
 }
 
 variable "common_tags" {
