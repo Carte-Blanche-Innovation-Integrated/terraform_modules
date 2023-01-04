@@ -35,14 +35,6 @@ variable "key_pair_name" {
   nullable    = true
 }
 
-variable "associate_public_ip" {
-  type        = bool
-  description = "Should a public ip address be attached with the instance?"
-  default     = true
-  sensitive   = false
-  nullable    = false
-}
-
 variable "sgs" {
   type        = list(string)
   description = "List of SG ids for EC2 instance."

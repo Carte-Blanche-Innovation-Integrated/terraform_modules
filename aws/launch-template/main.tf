@@ -27,10 +27,6 @@ resource "aws_launch_template" "template" {
     enabled = true
   }
 
-  network_interfaces {
-    associate_public_ip_address = var.associate_public_ip
-  }
-
   vpc_security_group_ids = var.sgs
 
   tag_specifications {
