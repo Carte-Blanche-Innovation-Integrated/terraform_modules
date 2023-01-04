@@ -29,6 +29,13 @@ variable "min_size" {
   nullable    = false
 }
 
+variable "subnet_ids" {
+  type        = list(string)
+  description = "List of subnet ids to launch instances in"
+  sensitive   = false
+  nullable    = false
+}
+
 variable "launch_template_id" {
   type        = string
   description = "ID of the EC2 launch template"

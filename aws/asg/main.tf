@@ -1,9 +1,9 @@
 resource "aws_autoscaling_group" "asg" {
   name               = var.name
-  availability_zones = data.aws_availability_zones.all.names
   desired_capacity   = var.desired_capacity
   max_size           = var.max_size
   min_size           = var.min_size
+  vpc_zone_identifer = var.subnet_ids
 
   launch_template {
     id      = var.launch_template_id
