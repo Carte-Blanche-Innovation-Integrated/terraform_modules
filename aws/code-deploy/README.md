@@ -1,6 +1,6 @@
 # Code deploy module
 
-Inplace deployment without a LB on EC2
+Inplace deployment with a LB on EC2 AutoScalingGroup
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements

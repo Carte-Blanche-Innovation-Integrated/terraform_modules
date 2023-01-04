@@ -29,9 +29,16 @@ variable "create_sns_topics" {
   sensitive   = false
 }
 
-variable "target_filters" {
-  type        = map(string)
-  description = "Tag filters associated with the deployment group."
+variable "target_group_name" {
+  type        = string
+  description = "Name of the LB target group"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "autoscaling_groups" {
+  type        = list(string)
+  description = "List of unique ASGs"
   sensitive   = false
   nullable    = false
 }

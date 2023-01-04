@@ -46,23 +46,26 @@ resource "aws_codedeploy_deployment_group" "group" {
   deployment_group_name = "${var.app_name}-deployment-group"
   service_role_arn      = var.create_iam_role ? module.iam.iam_role_arn : var.iam_role_name
 
-  dynamic "ec2_tag_filter" {
-    for_each = var.target_filters
+  deployment_style {
+    deployment_option = "WITH_TRAFFIC_CONTROL"
+    deployment_type   = "IN_PLACE"
+  }
 
-    content {
-      key   = each.key
-      type  = "KEY_AND_VALUE"
-      value = each.value
+  load_balancer_info {
+    target_group_info {
+      name = var.target_group_name
     }
   }
+
+  autoscaling_groups = var.autoscaling_groups
 
   dynamic "trigger_configuration" {
     for_each = { for i, each in aws_sns_topic.topics : local.triggers[i] => each.arn }
 
     content {
-      trigger_events     = [each.key]
-      trigger_name       = "${each.key}Trigger"
-      trigger_target_arn = each.value
+      trigger_events     = [trigger_configuration.key]
+      trigger_name       = "${trigger_configuration.key}Trigger"
+      trigger_target_arn = trigger_configuration.value
     }
   }
 
