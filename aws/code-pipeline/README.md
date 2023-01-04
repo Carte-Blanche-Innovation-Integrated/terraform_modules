@@ -1,5 +1,10 @@
 # CodePipeline module
 
+It caters for 1 use case:
+- Source = Github repo
+- Build = Skip
+- Deploy = CodeDeploy
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

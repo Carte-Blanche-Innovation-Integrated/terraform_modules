@@ -7,31 +7,39 @@ resource "aws_codepipeline" "codepipeline" {
     type     = "S3"
   }
 
-  dynamic "stage" {
-    for_each = [for s in var.stages : {
-      name   = s.name
-      action = s.action
-    } if(lookup(s, "enabled", true))]
+  stage {
+    name = "Source"
 
-    content {
-      name = stage.value.name
+    action {
+      name             = "Source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["source_output"]
 
-      dynamic "action" {
-        for_each = stage.value.action
+      configuration = {
+        ConnectionArn    = var.connection_arn
+        FullRepositoryId = var.full_repo_id
+        BranchName       = var.branch_name
+      }
+    }
+  }
 
-        content {
-          name             = action.value["name"]
-          owner            = action.value["owner"]
-          version          = action.value["version"]
-          category         = action.value["category"]
-          provider         = action.value["provider"]
-          input_artifacts  = lookup(action.value, "input_artifacts", [])
-          output_artifacts = lookup(action.value, "output_artifacts", [])
-          configuration    = lookup(action.value, "configuration", {})
-          role_arn         = lookup(action.value, "role_arn", null)
-          run_order        = lookup(action.value, "run_order", null)
-          region           = lookup(action.value, "region", data.aws_region.current.name)
-        }
+  stage {
+    name = "Deploy"
+
+    action {
+      name            = "Deploy"
+      category        = "Deploy"
+      owner           = "AWS"
+      provider        = "CodeDeploy"
+      input_artifacts = ["source_output"]
+      version         = "1"
+
+      configuration = {
+        "ApplicationName"     = var.code_deploy_app_name
+        "DeploymentGroupName" = var.code_deploy_dpgrp_name
       }
     }
   }

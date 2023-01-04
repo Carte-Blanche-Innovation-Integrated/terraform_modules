@@ -5,9 +5,38 @@ variable "pipeline_name" {
   nullable    = false
 }
 
-variable "stages" {
-  type        = list(any)
-  description = "A list of stages that constitute this pipeline"
+variable "connection_arn" {
+  type        = string
+  description = "ARN of the codestar connection to github"
+  sensitive   = false
+  nullable    = false
+}
+
+
+variable "full_repo_id" {
+  type        = string
+  description = "Full repo name of github"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "branch_name" {
+  type        = string
+  description = "Name of the branch to deploy"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "code_deploy_app_name" {
+  type        = string
+  description = "Name of the CodeDeploy app"
+  sensitive   = false
+  nullable    = false
+}
+
+variable "code_deploy_dpgrp_name" {
+  type        = string
+  description = "Name of the CodeDeploy deployment group"
   sensitive   = false
   nullable    = false
 }
