@@ -71,11 +71,11 @@ resource "aws_codedeploy_deployment_group" "group" {
 
   auto_rollback_configuration {
     enabled = true
-    events  = ["DeploymentFailure"]
+    events  = ["DEPLOYMENT_FAILURE"]
   }
 
   alarm_configuration {
-    alarms  = ["${var.app_name}-alarm"]
+    alarms  = ["${replace(var.app_name, "_", "-")}-alarm"]
     enabled = true
   }
 
